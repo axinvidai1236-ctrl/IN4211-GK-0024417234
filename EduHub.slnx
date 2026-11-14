@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EduHub.API/EduHub.API.csproj" />
+    <Project Path="src/EduHub.Application/EduHub.Application.csproj" />
+    <Project Path="src/EduHub.Domain/EduHub.Domain.csproj" />
+    <Project Path="src/EduHub.Infrastructure/EduHub.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EduHub.Tests/EduHub.Tests.csproj" />
+  </Folder>
+</Solution>
