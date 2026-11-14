@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="TRA-LOI.md" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/EduHub.API/EduHub.API.csproj" />
     <Project Path="src/EduHub.Application/EduHub.Application.csproj" />
