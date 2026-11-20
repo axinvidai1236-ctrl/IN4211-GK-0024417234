@@ -40,3 +40,4 @@ Lớp `EventService` đang vi phạm 3 nguyên lý SOLID:
 - *Dòng vi phạm:* Dòng 8, 12, 14.
 - *Giải thích:* Lớp `EventService` đang phụ thuộc trực tiếp vào các lớp cụ thể cấp thấp (khởi tạo trực tiếp `new SqlConnection`, `new EmailSender`, `new SmsSender`). Nguyên lý DIP yêu cầu các module cấp cao không nên phụ thuộc vào module cấp thấp mà cả hai nên phụ thuộc vào các abstraction (interface). Cần sử dụng Dependency Injection để truyền các interface này vào thay vì khởi tạo trực tiếp.
 
+"" 
