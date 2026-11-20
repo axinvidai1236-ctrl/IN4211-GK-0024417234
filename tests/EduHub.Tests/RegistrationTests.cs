@@ -15,7 +15,6 @@ namespace EduHub.Tests
             var r = Registration.Create(memberId, eventId);
             r.Cancel();
 
-            // Sửa lại: Thêm dấu ngoặc nhọn { } để tránh lỗi CS0619
             var exception = Assert.Throws<InvalidOperationException>(() => { r.Confirm(); });
 
             Assert.Equal(RegistrationStatus.Cancelled, r.Status);

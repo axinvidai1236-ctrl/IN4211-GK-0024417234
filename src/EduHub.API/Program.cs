@@ -1,18 +1,41 @@
+using EduHub.Application.Interfaces;
+using EduHub.Application.Services;
+using EduHub.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+
+builder.Services.AddSingleton<IEventRepository, InMemoryEventRepository>();
+builder.Services.AddTransient<EmailNotificationService>();
+builder.Services.AddTransient<SmsNotificationService>();
+
+builder.Services.AddTransient<Func<string, INotificationService>>(serviceProvider => key =>
+{
+    return key.ToLower() switch
+    {
+        "email" => serviceProvider.GetRequiredService<EmailNotificationService>(),
+        "sms" => serviceProvider.GetRequiredService<SmsNotificationService>(),
+        _ => throw new ArgumentException("Invalid notification channel")
+    };
+});
+
+builder.Services.AddTransient<EventService>();
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
+
 
 var summaries = new[]
 {
@@ -21,7 +44,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
